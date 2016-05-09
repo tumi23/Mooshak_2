@@ -124,5 +124,35 @@ namespace Mooshak2.Controllers
             }
             base.Dispose(disposing);
         }
+
+        public ActionResult AdminHome()
+        {
+            return View();
+        }
+
+        public ActionResult AdminCourses()
+        {
+            return View();
+        }
+
+        public ActionResult AdminUserControl()
+        {
+            return View();
+        }
+
+        public ActionResult TeacherHome()
+        {
+            return View();
+        }
+
+        public ActionResult TeacherCourseView()
+        {
+            return View();
+        }
+
+        public ActionResult StudentHome()
+        {
+            return View();
+        }
     }
 }
