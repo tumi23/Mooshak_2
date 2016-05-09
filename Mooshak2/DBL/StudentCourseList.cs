@@ -12,7 +12,7 @@ namespace Mooshak2.DBL
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Id { get; set; }
 
-        public int userId { get; set; }
+        public string userName { get; set; }
 
         public int courseId { get; set; }
 
