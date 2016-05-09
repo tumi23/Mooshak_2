@@ -52,6 +52,8 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -171,6 +173,23 @@
     <Compile Include="Controllers\AssignmentsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\UserControler.cs" />
+    <Compile Include="DBL\AspNetRole.cs" />
+    <Compile Include="DBL\AspNetUser.cs" />
+    <Compile Include="DBL\AspNetUserClaim.cs" />
+    <Compile Include="DBL\AspNetUserLogin.cs" />
+    <Compile Include="DBL\AspNetUserRole.cs" />
+    <Compile Include="DBL\Assignment.cs" />
+    <Compile Include="DBL\AssignmentList.cs" />
+    <Compile Include="DBL\Context.cs" />
+    <Compile Include="DBL\Course.cs" />
+    <Compile Include="DBL\C__MigrationHistory.cs" />
+    <Compile Include="DBL\Milestone.cs" />
+    <Compile Include="DBL\MilestoneList.cs" />
+    <Compile Include="DBL\Role.cs" />
+    <Compile Include="DBL\StudentCourseList.cs" />
+    <Compile Include="DBL\Submit.cs" />
+    <Compile Include="DBL\Table.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -242,6 +261,11 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Assignments\Details.cshtml" />
+    <Content Include="Views\UserControler\Create.cshtml" />
+    <Content Include="Views\UserControler\Delete.cshtml" />
+    <Content Include="Views\UserControler\Details.cshtml" />
+    <Content Include="Views\UserControler\Edit.cshtml" />
+    <Content Include="Views\UserControler\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
