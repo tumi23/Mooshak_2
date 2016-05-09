@@ -7,26 +7,12 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Mooshak2.DBL;
+using Mooshak2.Services;
 
 namespace Mooshak2.Controllers
 {
     public class UserController : Controller
     {
-        public ActionResult AdminHome()
-        {
-            return View();
-        }
-
-        public ActionResult AdminCourses()
-        {
-            return View();
-        }
-
-        public ActionResult AdminUserControl()
-        {
-            return View();
-        }
-
         private Context db = new Context();
 
         // GET: UserControler
