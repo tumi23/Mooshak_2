@@ -4,48 +4,55 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Mooshak2.DBL;
 using System.Threading.Tasks;
+using Microsoft.AspNet.Identity;
+using System.Web.Mvc;
 
 namespace Mooshak2.Services
 {
-	public class AssignmentsService
+	public class AssignmentsService : Controller
 	{
-		private ApplicationDbContext _db;
+		private Context db = new Context();
 
-		public AssignmentsService()
+        public List<Assignment> GetAssignmentsInCourse()
+        {
+            var AssignList = GetAllAssignments();
+            var CourseList = GetAllCourses();
+            var StudentList = GetAllStudentList();
+
+            List<Assignment> model = new List<Assignment>();
+            var query = from assignment in AssignList
+                        join course in CourseList on assignment.courseId equals course.Id
+                        join stdnt in StudentList on course.Id equals stdnt.courseId
+                        select new { assignment.Id, assignment.Name, assignment.Description};
+
+            foreach (var assignment in query)
+            {
+                model.Add(new Assignment() { Name = assignment.Name, Id = assignment.Id, Description = assignment.Description});
+            }
+            return model;
+        }
+
+        public List<Assignment> GetAllAssignments()
+        {
+            return db.Assignments.ToList();
+        }
+
+        public List<Course> GetAllCourses()
+        {
+            return db.Courses.ToList();
+        }
+
+        public List<StudentCourseList> GetAllStudentList()
+        {
+            return db.StudentCourseLists.ToList();
+        }
+
+        public Assignment GetAssignmentByID(int assignmentID)
 		{
-			_db = new ApplicationDbContext();
-		}
-
-		public List<AssignmentViewModel> GetAssignmentsInCourse(int courseID)
-		{
-			// TODO:
-			return null;
-		}
-
-		public AssignmentViewModel GetAssignmentByID(int assignmentID)
-		{
-			var assignment = _db.Assignments.SingleOrDefault(x => x.ID == assignmentID);
-			if (assignment == null)
-			{
-				// TODO: kasta villu!
-			}
-
-			var milestones = _db.Milestones
-				.Where(x => x.AssignmentID == assignmentID)
-				.Select(x => new AssignmentMilestoneViewModel
-				{
-					Title = x.Title
-				})
-				.ToList();
-
-			var viewModel = new AssignmentViewModel
-			{
-				Title      = assignment.Title,
-				Milestones = milestones
-			};
-
-			return viewModel;
+			Assignment assignment = db.Assignments.SingleOrDefault(x => x.Id == assignmentID);
+			return assignment;
 		}
 
 	}

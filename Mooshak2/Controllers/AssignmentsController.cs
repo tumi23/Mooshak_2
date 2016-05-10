@@ -6,7 +6,11 @@ using System.Web;
 using System.Web.Mvc;
 using Mooshak2.DBL;
 using Mooshak2.Models;
+using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin.Security;
+using Mooshak2.DBL;
 
 namespace Mooshak2.Controllers
 {
@@ -20,25 +24,17 @@ namespace Mooshak2.Controllers
         [Authorize]
         public ActionResult Index()
         {
-            string strCurrentUserName = User.Identity.GetUserName();
-            List <Assignment> model = new List <Assignment>();
-            var query = from assignment in db.Assignments
-                        join course in db.Courses on assignment.courseId equals course.Id
-                        join stdnt in db.StudentCourseLists on course.Id equals stdnt.courseId
-                        select assignment.Name;
-            foreach (var assignment in query)
-            {
-                model.Add(new Assignment() {Name = assignment});
-            }
+            List<Assignment> model = new List<Assignment>();
+            model = _service.GetAssignmentsInCourse();
             return View(model);
         }
 
-        [HttpGet]
+        [Authorize(Roles = "Admin, Teacher")]
         public ActionResult Edit(int? id)
         {
             if (id.HasValue)
             {
-                Assignment assignment = db.Assignments.Where(x => x.Id== id.Value).SingleOrDefault();
+                Assignment assignment = db.Assignments.Where(x => x.Id == id.Value).SingleOrDefault();
                 if (assignment != null)
                 {
                     Assignment model = new Assignment();
@@ -53,5 +49,56 @@ namespace Mooshak2.Controllers
             }
             return HttpNotFound();
         }
+
+        /*[Authorize(Roles = "Admin, Teacher")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Edit(Assignment model)
+        {
+            if (ModelState.IsValid)
+            {
+                var assign = new Assignment { UserName = model.Email, Email = model.Email };
+                var result = await UserManager.CreateAsync(user, model.Password);
+                if (result.Succeeded)
+                {
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
+                    // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
+                    // Send an email with this link
+                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+
+                    return RedirectToAction("Index", "Home");
+                }
+            }
+
+            // If we got this far, something failed, redisplay form
+            return View(model);
+        }*/
+
+        [Authorize(Roles = "Admin, Teacher")]
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        [Authorize]
+        public ActionResult Details(int id)
+        {
+            Assignment model = new Assignment();
+            model = _service.GetAssignmentByID(id);
+            return View(model);
+        }
+
+        [Authorize(Roles = "Admin, Teacher")]
+        public ActionResult Delete(int id)
+        {
+            Assignment model = new Assignment();
+            model = _service.GetAssignmentByID(id);
+            return View(model);
+        }
+
+
     }
 }
