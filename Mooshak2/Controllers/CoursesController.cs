@@ -19,7 +19,7 @@ namespace Mooshak2.Controllers
         {
             return View(db.Courses.ToList());
         }
-
+        
         // GET: Courses/Details/5
         public ActionResult Details(int? id)
         {
