@@ -174,7 +174,7 @@
     <Compile Include="Controllers\CoursesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Controllers\UserControlController.cs" />
     <Compile Include="DBL\AspNetRole.cs" />
     <Compile Include="DBL\AspNetUser.cs" />
     <Compile Include="DBL\AspNetUserClaim.cs" />
@@ -202,8 +202,11 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\ViewModels\AssignmentMilestoneViewModel.cs" />
     <Compile Include="Models\ViewModels\AssignmentViewModel.cs" />
+    <Compile Include="Models\ViewModels\DetailUserViewModel.cs" />
+    <Compile Include="Models\ViewModels\UserViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AssignmentsService.cs" />
+    <Compile Include="Services\UserService.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -261,11 +264,6 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\UserControler\Create.cshtml" />
-    <Content Include="Views\UserControler\Delete.cshtml" />
-    <Content Include="Views\UserControler\Details.cshtml" />
-    <Content Include="Views\UserControler\Edit.cshtml" />
-    <Content Include="Views\UserControler\Index.cshtml" />
     <Content Include="Views\Courses\Create.cshtml" />
     <Content Include="Views\Courses\Delete.cshtml" />
     <Content Include="Views\Courses\Details.cshtml" />
@@ -276,6 +274,11 @@
     <Content Include="Views\Assignments\Create.cshtml" />
     <Content Include="Views\Assignments\Details.cshtml" />
     <Content Include="Views\Assignments\Delete.cshtml" />
+    <Content Include="Views\UserControl\Index.cshtml" />
+    <Content Include="Views\UserControl\Create.cshtml" />
+    <Content Include="Views\UserControl\Edit.cshtml" />
+    <Content Include="Views\UserControl\Delete.cshtml" />
+    <Content Include="Views\UserControl\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -9,6 +9,10 @@
         <li>
             @Html.ActionLink("Welcome " + User.Identity.GetUserName(), "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
         </li>
+        @if (User.IsInRole("Admin"))
+        {
+            <li>@Html.ActionLink("User Control", "Index", "UserControl", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+        }
         <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
     </ul>
     }

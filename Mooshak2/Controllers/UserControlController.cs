@@ -6,17 +6,62 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Globalization;
+using System.Security.Claims;
+using System.Threading.Tasks;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin.Security;
 using Mooshak2.DBL;
 using Mooshak2.Services;
+using Mooshak2.Models;
 
 namespace Mooshak2.Controllers
 {
     [Authorize]
-    public class UserController : Controller
+    public class UserControlController : Controller
     {
         private Context db = new Context();
 
+        private ApplicationSignInManager _signInManager;
+        private ApplicationUserManager _userManager;
+
+        public UserControlController()
+        {
+        }
+
+        public UserControlController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
+        {
+            UserManager = userManager;
+            SignInManager = signInManager;
+        }
+
+        public ApplicationSignInManager SignInManager
+        {
+            get
+            {
+                return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
+            }
+            private set
+            {
+                _signInManager = value;
+            }
+        }
+
+        public ApplicationUserManager UserManager
+        {
+            get
+            {
+                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+            private set
+            {
+                _userManager = value;
+            }
+        }
+
         // GET: UserControler
+        [Authorize(Roles = "Admin")]
         public ActionResult Index()
         {
             return View(db.AspNetUsers.ToList());
@@ -44,20 +89,21 @@ namespace Mooshak2.Controllers
         }
 
         // POST: UserControler/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Hometown,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName,RoleId")] AspNetUser aspNetUser)
+        public async Task<ActionResult> Create(RegisterViewModel model)
         {
             if (ModelState.IsValid)
             {
-                db.AspNetUsers.Add(aspNetUser);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                var user = new ApplicationUser { UserName = model.UserName, Email = model.Email};
+                var result = await UserManager.CreateAsync(user, model.Password);
+                if(result.Succeeded)
+                {
+                    var currentUser = UserManager.FindByName(user.UserName);
+                    var roleresult = UserManager.AddToRole(currentUser.Id, model.Role);
+                }
             }
-
-            return View(aspNetUser);
+            return RedirectToAction("Index", "UserControl");
         }
 
         // GET: UserControler/Edit/5
@@ -124,36 +170,6 @@ namespace Mooshak2.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
-        }
-
-        public ActionResult AdminHome()
-        {
-            return View();
-        }
-
-        public ActionResult AdminCourses()
-        {
-            return View();
-        }
-
-        public ActionResult AdminUserControl()
-        {
-            return View();
-        }
-
-        public ActionResult TeacherHome()
-        {
-            return View();
-        }
-
-        public ActionResult TeacherCourseView()
-        {
-            return View();
-        }
-
-        public ActionResult StudentHome()
-        {
-            return View();
         }
     }
 }
