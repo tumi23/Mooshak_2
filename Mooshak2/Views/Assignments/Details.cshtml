@@ -4,69 +4,36 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2>@Html.DisplayFor(model => model.Name)</h2>
 
-<div>
-    <h4>Assignment</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Course.Name)
-        </dt>
+<div class="ass-detail">
+    
+    <h4>@Html.DisplayFor(model => model.Course.Name) </h4>  
+     
+    <label>Description: </label>
+    <p>@Html.DisplayFor(model => model.Description)</p>
+    
+    <p>
+    <label>First Day of Submission:  </label>
+    @Html.DisplayFor(model => model.DateOfAssigned)
+    </p>
+    
+    <p>
+    <label>Last Day of Submittion:  </label>
+    @Html.DisplayFor(model => model.DateOfSubmittion)
+    </p>
 
-        <dd>
-            @Html.DisplayFor(model => model.Course.Name)
-        </dd>
+    <p>
+    <label>Allowed Programming Language:  </label>
+    @Html.DisplayFor(model => model.AllowedProgrammingLanguage)
+    </p>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
+    <p>
+    <label>Final Grade:  </label>
+    @Html.DisplayFor(model => model.FinalGrade)
+    </p>
 
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DateOfAssigned)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DateOfAssigned)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DateOfSubmittion)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DateOfSubmittion)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.AllowedProgrammingLanguage)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.AllowedProgrammingLanguage)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.FinalGrade)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.FinalGrade)
-        </dd>
-
-    </dl>
+    
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
