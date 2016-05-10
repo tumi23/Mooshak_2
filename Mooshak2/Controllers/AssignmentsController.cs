@@ -10,7 +10,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
-using Mooshak2.DBL;
 using System.Data.SqlClient;
 
 namespace Mooshak2.Controllers

@@ -10,7 +10,7 @@ namespace Mooshak2.Services
     {
         private Context db = new Context();
 
-        public List<AspNetUser> GetUsersInCourse()
+        /*public List<AspNetUser> GetUsersInCourse()
         {
             var AssiList = GetAllAssignments();
             var CoursList = GetAllCourses();
@@ -21,7 +21,7 @@ namespace Mooshak2.Services
 
             var UserEntity = from user in 
                              join 
-        }
+        }*/
 
 
 
