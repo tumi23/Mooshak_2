@@ -58,7 +58,8 @@ html {
 }
 
 body {
-  margin: 0;
+  margin: auto;
+  width: 60%;
 }
 
 a:focus {
@@ -527,6 +528,8 @@ h3,
 h4,
 .h4 {
   font-size: 18px;
+  margin-bottom: 30px;
+  color: #666666;
 }
 
 h5,
@@ -1412,11 +1415,22 @@ table {
 
 th {
   text-align: left;
+  background-color: #ff0000;
+}
+
+.table tr:nth-child(even)
+{
+  background-color: #f2f2f2;
 }
 
 .table {
   width: 100%;
   margin-bottom: 20px;
+}
+
+.table tr:hover
+{
+    background-color: #cbb4b4;
 }
 
 .table thead > tr > th,
