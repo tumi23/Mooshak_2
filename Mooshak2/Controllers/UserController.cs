@@ -11,6 +11,7 @@ using Mooshak2.Services;
 
 namespace Mooshak2.Controllers
 {
+    [Authorize]
     public class UserController : Controller
     {
         private Context db = new Context();
