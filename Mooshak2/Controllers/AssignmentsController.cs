@@ -5,7 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Mooshak2.DBL;
-using Mooshak2.Models;
+using Mooshak2.Models.ViewModels;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
@@ -97,6 +97,16 @@ namespace Mooshak2.Controllers
             Assignment model = new Assignment();
             model = _service.GetAssignmentByID(id);
             return View(model);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            Assignment assignment = db.Assignments.Find(id);
+            db.Assignments.Remove(assignment);
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
 
 

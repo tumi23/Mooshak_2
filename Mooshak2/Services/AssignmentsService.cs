@@ -18,7 +18,6 @@ namespace Mooshak2.Services
             var StudentList = GetAllStudentList();
 
             List<Assignment> model = new List<Assignment>();
-            List<AssignmentViewModel> model2 = new List<AssignmentViewModel>();
             var query = from assignment in AssignList
                         join course in CourseList on assignment.courseId equals course.Id
                         join stdnt in StudentList on course.Id equals stdnt.courseId

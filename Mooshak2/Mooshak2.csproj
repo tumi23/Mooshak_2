@@ -187,10 +187,8 @@
     <Compile Include="DBL\C__MigrationHistory.cs" />
     <Compile Include="DBL\Milestone.cs" />
     <Compile Include="DBL\MilestoneList.cs" />
-    <Compile Include="DBL\Role.cs" />
     <Compile Include="DBL\StudentCourseList.cs" />
     <Compile Include="DBL\Submit.cs" />
-    <Compile Include="DBL\Table.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -202,6 +200,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\ViewModels\AssignmentMilestoneViewModel.cs" />
     <Compile Include="Models\ViewModels\AssignmentViewModel.cs" />
+    <Compile Include="Models\ViewModels\AssignmentCreateViewModel.cs" />
     <Compile Include="Models\ViewModels\DetailUserViewModel.cs" />
     <Compile Include="Models\ViewModels\UserViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -279,6 +278,7 @@
     <Content Include="Views\UserControl\Edit.cshtml" />
     <Content Include="Views\UserControl\Delete.cshtml" />
     <Content Include="Views\UserControl\Details.cshtml" />
+    <Content Include="Views\UserControl\AddCourse.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -68,6 +68,7 @@ namespace Mooshak2.Controllers
         }
 
         // GET: UserControler/Details/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Details(string id)
         {
             if (id == null)
@@ -83,6 +84,7 @@ namespace Mooshak2.Controllers
         }
 
         // GET: UserControler/Create
+        [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
             return View();
@@ -91,6 +93,7 @@ namespace Mooshak2.Controllers
         // POST: UserControler/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Create(RegisterViewModel model)
         {
             if (ModelState.IsValid)
@@ -107,6 +110,7 @@ namespace Mooshak2.Controllers
         }
 
         // GET: UserControler/Edit/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit(string id)
         {
             if (id == null)
@@ -126,6 +130,7 @@ namespace Mooshak2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit([Bind(Include = "Id,Hometown,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName,RoleId")] AspNetUser aspNetUser)
         {
             if (ModelState.IsValid)
@@ -138,6 +143,7 @@ namespace Mooshak2.Controllers
         }
 
         // GET: UserControler/Delete/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Delete(string id)
         {
             if (id == null)
@@ -153,6 +159,7 @@ namespace Mooshak2.Controllers
         }
 
         // POST: UserControler/Delete/5
+        [Authorize(Roles = "Admin")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)

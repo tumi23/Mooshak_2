@@ -15,12 +15,14 @@ namespace Mooshak2.Controllers
         private Context db = new Context();
 
         // GET: Courses
+        [Authorize]
         public ActionResult Index()
         {
             return View(db.Courses.ToList());
         }
-        
+
         // GET: Courses/Details/5
+        [Authorize]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -39,7 +41,6 @@ namespace Mooshak2.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
-            
             return View();
         }
 
@@ -62,6 +63,7 @@ namespace Mooshak2.Controllers
         }
 
         // GET: Courses/Edit/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -81,6 +83,7 @@ namespace Mooshak2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit([Bind(Include = "Id,Name,Description")] Course course)
         {
             if (ModelState.IsValid)

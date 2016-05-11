@@ -23,10 +23,8 @@ namespace Mooshak2.DBL
         public virtual DbSet<Course> Courses { get; set; }
         public virtual DbSet<Milestone> Milestones { get; set; }
         public virtual DbSet<MilestoneList> MilestoneLists { get; set; }
-        public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<StudentCourseList> StudentCourseLists { get; set; }
         public virtual DbSet<Submit> Submits { get; set; }
-        public virtual DbSet<Table> Tables { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -83,21 +81,9 @@ namespace Mooshak2.DBL
                 .WithRequired(e => e.Milestone)
                 .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<Role>()
-                .Property(e => e.Role1)
-                .IsUnicode(false);
-
             modelBuilder.Entity<Submit>()
                 .Property(e => e.Code)
                 .IsUnicode(false);
-
-            modelBuilder.Entity<Table>()
-                .Property(e => e.Name)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<Table>()
-                .Property(e => e.FinalGrade)
-                .HasPrecision(20, 0);
         }
     }
 }
