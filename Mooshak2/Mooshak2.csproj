@@ -175,20 +175,20 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\UserControlController.cs" />
-    <Compile Include="DBL\AspNetRole.cs" />
-    <Compile Include="DBL\AspNetUser.cs" />
-    <Compile Include="DBL\AspNetUserClaim.cs" />
-    <Compile Include="DBL\AspNetUserLogin.cs" />
-    <Compile Include="DBL\AspNetUserRole.cs" />
-    <Compile Include="DBL\Assignment.cs" />
-    <Compile Include="DBL\AssignmentList.cs" />
-    <Compile Include="DBL\Context.cs" />
-    <Compile Include="DBL\Course.cs" />
-    <Compile Include="DBL\C__MigrationHistory.cs" />
-    <Compile Include="DBL\Milestone.cs" />
-    <Compile Include="DBL\MilestoneList.cs" />
-    <Compile Include="DBL\StudentCourseList.cs" />
-    <Compile Include="DBL\Submit.cs" />
+    <Compile Include="DAL\AspNetRoles.cs" />
+    <Compile Include="DAL\AspNetUserClaims.cs" />
+    <Compile Include="DAL\AspNetUserLogins.cs" />
+    <Compile Include="DAL\AspNetUserRoles.cs" />
+    <Compile Include="DAL\AspNetUser.cs" />
+    <Compile Include="DAL\Assignment.cs" />
+    <Compile Include="DAL\AssignmentList.cs" />
+    <Compile Include="DAL\Context.cs" />
+    <Compile Include="DAL\Course.cs" />
+    <Compile Include="DAL\C__MigrationHistory.cs" />
+    <Compile Include="DAL\Milestone.cs" />
+    <Compile Include="DAL\MilestoneList.cs" />
+    <Compile Include="DAL\StudentCourseList.cs" />
+    <Compile Include="DAL\Submit.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -205,6 +205,7 @@
     <Compile Include="Models\ViewModels\UserViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AssignmentsService.cs" />
+    <Compile Include="Services\CourseService.cs" />
     <Compile Include="Services\UserService.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -290,6 +291,9 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

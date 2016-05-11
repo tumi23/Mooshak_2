@@ -1,4 +1,4 @@
-namespace Mooshak2.DBL
+namespace Mooshak2.DAL
 {
     using System;
     using System.Collections.Generic;
@@ -6,19 +6,18 @@ namespace Mooshak2.DBL
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("Submit")]
-    public partial class Submit
+    [Table("Milestone")]
+    public partial class Milestone
     {
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Id { get; set; }
 
-        public int userName { get; set; }
-
-        public int assignId { get; set; }
+        public int AssignmentId { get; set; }
 
         [Required]
-        public string Code { get; set; }
+        [StringLength(50)]
+        public string Title { get; set; }
 
-        public DateTime DateOfSubmit { get; set; }
+        public int? Weight { get; set; }
     }
 }

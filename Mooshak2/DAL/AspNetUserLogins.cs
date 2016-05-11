@@ -1,4 +1,4 @@
-namespace Mooshak2.DBL
+namespace Mooshak2.DAL
 {
     using System;
     using System.Collections.Generic;
@@ -6,7 +6,7 @@ namespace Mooshak2.DBL
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class AspNetUserLogin
+    public partial class AspNetUserLogins
     {
         [Key]
         [Column(Order = 0)]
@@ -20,6 +20,6 @@ namespace Mooshak2.DBL
         [Column(Order = 2)]
         public string UserId { get; set; }
 
-        public virtual AspNetUser AspNetUser { get; set; }
+        public virtual AspNetUser AspNetUsers { get; set; }
     }
 }

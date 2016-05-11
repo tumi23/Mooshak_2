@@ -1,4 +1,4 @@
-namespace Mooshak2.DBL
+namespace Mooshak2.DAL
 {
     using System;
     using System.Collections.Generic;
@@ -11,8 +11,8 @@ namespace Mooshak2.DBL
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public AspNetUser()
         {
-            AspNetUserLogins = new HashSet<AspNetUserLogin>();
-            AspNetUserRoles = new HashSet<AspNetUserRole>();
+            AspNetUserLogins = new HashSet<AspNetUserLogins>();
+            AspNetUserRoles = new HashSet<AspNetUserRoles>();
         }
 
         public string Id { get; set; }
@@ -47,9 +47,9 @@ namespace Mooshak2.DBL
         public int? RoleId { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<AspNetUserLogin> AspNetUserLogins { get; set; }
+        public virtual ICollection<AspNetUserLogins> AspNetUserLogins { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<AspNetUserRole> AspNetUserRoles { get; set; }
+        public virtual ICollection<AspNetUserRoles> AspNetUserRoles { get; set; }
     }
 }

@@ -6,19 +6,21 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using Mooshak2.DBL;
+using Mooshak2.DAL;
+using Mooshak2.Services;
 
 namespace Mooshak2.Controllers
 {
     public class CoursesController : Controller
     {
         private Context db = new Context();
+        private CourseService cService = new CourseService();
 
         // GET: Courses
         [Authorize]
         public ActionResult Index()
         {
-            return View(db.Courses.ToList());
+            return View(db.Course.ToList());
         }
 
         // GET: Courses/Details/5
@@ -29,7 +31,7 @@ namespace Mooshak2.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Course course = db.Courses.Find(id);
+            Course course = db.Course.Find(id);
             if (course == null)
             {
                 return HttpNotFound();
@@ -50,11 +52,22 @@ namespace Mooshak2.Controllers
         [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Description")] Course course)
+        public ActionResult Create(Course course)
         {
             if (ModelState.IsValid)
             {
-                db.Courses.Add(course);
+                var count = cService.GetAllCourses().LastOrDefault();
+                int id;
+                if (count == null)
+                    id = 0;
+                else
+                    id = count.Id + 1;
+                db.Course.Add(new Course
+                {
+                    Id = id,
+                    Name = course.Name,
+                    Description = course.Description
+                });
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -70,7 +83,7 @@ namespace Mooshak2.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Course course = db.Courses.Find(id);
+            Course course = db.Course.Find(id);
             if (course == null)
             {
                 return HttpNotFound();
@@ -103,7 +116,7 @@ namespace Mooshak2.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Course course = db.Courses.Find(id);
+            Course course = db.Course.Find(id);
             if (course == null)
             {
                 return HttpNotFound();
@@ -116,8 +129,8 @@ namespace Mooshak2.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Course course = db.Courses.Find(id);
-            db.Courses.Remove(course);
+            Course course = db.Course.Find(id);
+            db.Course.Remove(course);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

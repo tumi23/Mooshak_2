@@ -12,9 +12,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
-using Mooshak2.DBL;
+using Mooshak2.DAL;
 using Mooshak2.Services;
 using Mooshak2.Models;
+using Mooshak2.Models.ViewModels;
 
 namespace Mooshak2.Controllers
 {

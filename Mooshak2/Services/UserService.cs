@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using Mooshak2.DBL;
+using Mooshak2.DAL;
 
 namespace Mooshak2.Services
 {
@@ -27,17 +27,17 @@ namespace Mooshak2.Services
 
         public List<Assignment> GetAllAssignments()
         {
-            return db.Assignments.ToList();
+            return db.Assignment.ToList();
         }
 
         public List<Course> GetAllCourses()
         {
-            return db.Courses.ToList();
+            return db.Course.ToList();
         }
 
         public List<StudentCourseList> GetAllStudentList()
         {
-            return db.StudentCourseLists.ToList();
+            return db.StudentCourseList.ToList();
         }
     }
 }

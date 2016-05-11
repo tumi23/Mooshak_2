@@ -1137,14 +1137,14 @@ intellisense.annotate(jQuery.fn, {
     ///   <returns type="jQuery" />
     /// </signature>
   },
-  'dblclick': function() {
+  'DALclick': function() {
     /// <signature>
-    ///   <summary>Bind an event handler to the "dblclick" JavaScript event, or trigger that event on an element.</summary>
+    ///   <summary>Bind an event handler to the "DALclick" JavaScript event, or trigger that event on an element.</summary>
     ///   <param name="handler(eventObject)" type="Function">A function to execute each time the event is triggered.</param>
     ///   <returns type="jQuery" />
     /// </signature>
     /// <signature>
-    ///   <summary>Bind an event handler to the "dblclick" JavaScript event, or trigger that event on an element.</summary>
+    ///   <summary>Bind an event handler to the "DALclick" JavaScript event, or trigger that event on an element.</summary>
     ///   <param name="eventData" type="Object">An object containing data that will be passed to the event handler.</param>
     ///   <param name="handler(eventObject)" type="Function">A function to execute each time the event is triggered.</param>
     ///   <returns type="jQuery" />

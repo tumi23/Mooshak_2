@@ -1,4 +1,4 @@
-namespace Mooshak2.DBL
+namespace Mooshak2.DAL
 {
     using System;
     using System.Collections.Generic;
@@ -15,7 +15,5 @@ namespace Mooshak2.DBL
         public int assignmentId { get; set; }
 
         public int milestoneId { get; set; }
-
-        public virtual Milestone Milestone { get; set; }
     }
 }

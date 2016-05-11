@@ -11,7 +11,6 @@ namespace Mooshak2.Models.ViewModels
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public string CourseName { get; set; }
 
         public List<AssignmentMilestoneViewModel> Milestones { get; set; }
 	}

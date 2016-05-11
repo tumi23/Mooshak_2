@@ -1,4 +1,4 @@
-﻿@model Mooshak2.DBL.Assignment
+﻿@model Mooshak2.DAL.Assignment
 
 @{
     ViewBag.Title = "Details";
@@ -8,8 +8,12 @@
 
 <div class="ass-detail">
     
-    <h4>@Html.DisplayFor(model => model.Course.Name) </h4>  
-     
+    <label>ID: </label>
+    <p>@Html.DisplayFor(model => model.Id)</p> 
+
+    <label>Name: </label>
+    <p>@Html.DisplayFor(model => model.Name)</p> 
+
     <label>Description: </label>
     <p>@Html.DisplayFor(model => model.Description)</p>
     

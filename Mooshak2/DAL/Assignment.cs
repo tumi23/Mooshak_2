@@ -1,4 +1,4 @@
-namespace Mooshak2.DBL
+namespace Mooshak2.DAL
 {
     using System;
     using System.Collections.Generic;
@@ -11,8 +11,6 @@ namespace Mooshak2.DBL
     {
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Id { get; set; }
-
-        public int courseId { get; set; }
 
         [StringLength(250)]
         public string Name { get; set; }
@@ -29,7 +27,5 @@ namespace Mooshak2.DBL
         public string AllowedProgrammingLanguage { get; set; }
 
         public decimal? FinalGrade { get; set; }
-
-        public virtual Course Course { get; set; }
     }
 }
