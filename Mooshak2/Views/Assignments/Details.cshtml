@@ -7,27 +7,46 @@
 <h2>@Html.DisplayFor(model => model.Name)</h2>
 
 <div class="ass-detail">
-    <p>
+    
+    
+    <p class="ass-l">
         <label>Assignment Name:  </label>
+    </p>
+
+    <p class="ass-p">
         @Html.DisplayFor(model => model.Name)
     </p>
-    <p>
-        <label>Description:  </label>
+
+    <p class="ass-l">
+        <label class="ass-l">Description:  </label>
+    </p>
+
+    <p class="ass-p">
         @Html.DisplayFor(model => model.Description)
     </p>
 
-    <p>
-        <label>Day Assigned:  </label>
+    <p class="ass-l">
+        <label class="ass-l">Day Assigned:  </label>
+        
+    </p>
+
+    <p class="ass-p">
         @Html.DisplayFor(model => model.DateOfAssigned)
     </p>
     
-    <p>
-        <label>Last Day of Submittion:  </label>
+    <p class="ass-l">
+        <label class="ass-p">Last Day of Submittion:  </label>
+    </p>
+
+    <p class="ass-p">
         @Html.DisplayFor(model => model.DateOfSubmittion)
     </p>
 
-    <p>
-        <label>Allowed Programming Language:  </label>
+    <p class="ass-l">
+        <label class="ass-p">Allowed Programming Language:  </label>
+    </p>
+
+    <p class="ass-p"> 
         @Html.DisplayFor(model => model.AllowedProgrammingLanguage)
     </p> 
 </div>

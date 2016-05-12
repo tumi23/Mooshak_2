@@ -309,6 +309,7 @@ table {
 html {
   font-size: 62.5%;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  background: #660000;
 }
 
 body {
@@ -317,6 +318,8 @@ body {
   line-height: 1.428571429;
   color: #333333;
   background-color: #f2f2f2;
+  width: 65%;
+  padding: 20px;
 }
 
 input,
@@ -452,6 +455,16 @@ cite {
 
 .text-left {
   text-align: left;
+}
+
+p.ass-l
+{
+  border-bottom: 0.5px solid #e6e6e6;
+}
+
+p.ass-p
+{
+  margin-bottom: 25px;
 }
 
 .text-right {
