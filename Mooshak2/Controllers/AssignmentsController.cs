@@ -49,33 +49,6 @@ namespace Mooshak2.Controllers
             return HttpNotFound();
         }
 
-        /*[Authorize(Roles = "Admin, Teacher")]
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit(Assignment model)
-        {
-            if (ModelState.IsValid)
-            {
-                var assign = new Assignment { UserName = model.Email, Email = model.Email };
-                var result = await UserManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
-                {
-                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-
-                    // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
-                    // Send an email with this link
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-
-                    return RedirectToAction("Index", "Home");
-                }
-            }
-
-            // If we got this far, something failed, redisplay form
-            return View(model);
-        }*/
-
         [Authorize(Roles = "Admin, Teacher")]
         public ActionResult Create()
         {
@@ -115,11 +88,35 @@ namespace Mooshak2.Controllers
             return View(model);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin, Teacher")]
+        public ActionResult CreateMilestone(MilestoneCreateViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                model = aService.CreateMilestone(model);
+                aService.CreateMilestoneList(model);
+                return RedirectToAction("Index");
+            }
+            return View(model);
+        }
+
+        [Authorize(Roles = "Admin, Teacher")]
+        public ActionResult CreateMilestone(int id)
+        {
+            MilestoneCreateViewModel model = new MilestoneCreateViewModel();
+            model.assignmentId = id;
+            return View(model);
+        }
+
+
         [Authorize]
         public ActionResult Details(int id)
         {
-            Assignment model = new Assignment();
-            model = aService.GetAssignmentByID(id);
+            AssignmentDetailViewModel model = new AssignmentDetailViewModel();
+            model.Assignments = aService.GetAssignmentByID(id);
+            model.Milestones = aService.GetAllMilestonesByAssignId(id);
             return View(model);
         }
 
@@ -138,6 +135,22 @@ namespace Mooshak2.Controllers
             Assignment assignment = db.Assignment.Find(id);
             db.Assignment.Remove(assignment);
             db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        [Authorize(Roles = "Admin, Teacher")]
+        public ActionResult DeleteMilestone(int id)
+        {
+            Milestone model = new Milestone();
+            model = aService.GetMilestoneById(id);
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteMilestone(Milestone model)
+        {
+            aService.MilestoneDelete(model.Id);
             return RedirectToAction("Index");
         }
 

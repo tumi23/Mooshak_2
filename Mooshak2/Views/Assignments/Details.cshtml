@@ -1,10 +1,10 @@
-﻿@model Mooshak2.DAL.Assignment
+﻿@model Mooshak2.Models.AssignmentDetailViewModel
 
 @{
     ViewBag.Title = "Details";
 }
 
-<h2>@Html.DisplayFor(model => model.Name)</h2>
+<h2>@Html.DisplayFor(model => model.Assignments.Name)</h2>
 
 <div class="ass-detail">
     
@@ -14,7 +14,7 @@
     </p>
 
     <p class="ass-p">
-        @Html.DisplayFor(model => model.Name)
+        @Html.DisplayFor(model => model.Assignments.Name)
     </p>
 
     <p class="ass-l">
@@ -22,7 +22,7 @@
     </p>
 
     <p class="ass-p">
-        @Html.DisplayFor(model => model.Description)
+        @Html.DisplayFor(model => model.Assignments.Description)
     </p>
 
     <p class="ass-l">
@@ -31,7 +31,7 @@
     </p>
 
     <p class="ass-p">
-        @Html.DisplayFor(model => model.DateOfAssigned)
+        @Html.DisplayFor(model => model.Assignments.DateOfAssigned)
     </p>
     
     <p class="ass-l">
@@ -39,7 +39,7 @@
     </p>
 
     <p class="ass-p">
-        @Html.DisplayFor(model => model.DateOfSubmittion)
+        @Html.DisplayFor(model => model.Assignments.DateOfSubmittion)
     </p>
 
     <p class="ass-l">
@@ -47,13 +47,46 @@
     </p>
 
     <p class="ass-p"> 
-        @Html.DisplayFor(model => model.AllowedProgrammingLanguage)
+        @Html.DisplayFor(model => model.Assignments.AllowedProgrammingLanguage)
     </p> 
 </div>
-@if (User.IsInRole("Admin, Teacher"))
+<table class="table">
+    <tr>
+        <th>
+            Milestone Name
+        </th>
+        <th>
+            Weight
+        </th>
+        <th>
+
+        </th>
+    </tr>
+
+    @foreach (var item in Model.Milestones)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Weight)%
+            </td>
+            @if (User.IsInRole("Admin"))
+            {
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "DeleteMilestone", new { id = item.Id }) |
+            </td>
+            }
+        </tr>
+    }
+</table>
+@if (User.IsInRole("Admin") || User.IsInRole("Teacher"))
 {
     <p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Assignments.Id }) |
+        @Html.ActionLink("Add Milestone", "CreateMilestone", new { id = Model.Assignments.Id }) |
         @Html.ActionLink("Back to List", "Index")
     </p>
 }
