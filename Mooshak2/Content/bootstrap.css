@@ -1428,7 +1428,8 @@ table {
 
 th {
   text-align: left;
-  background-color: #ff0000;
+  background-color: #404040;
+  color: #f2f2f2;
 }
 
 .table tr:nth-child(even)

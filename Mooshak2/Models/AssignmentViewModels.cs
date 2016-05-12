@@ -19,7 +19,7 @@ namespace Mooshak2.Models
         public IEnumerable<SelectListItem> ListCourses { get; set; }
     }
 
-    public class AssignmentViewModel
+    public class AssignmentIndexViewModel
 	{
         public Assignment Assignments { get; set; }
         public Course Courses { get; set; }
@@ -28,5 +28,19 @@ namespace Mooshak2.Models
     public class AssignmentMilestoneViewModel
     {
         public string Title { get; set; }
+    }
+
+    public class AssignmentDetailViewModel
+    {
+        public Assignment Assignments  { get; set; }
+        public List<Milestone> Milestones { get; set; }
+    }
+
+    public class MilestoneCreateViewModel
+    {
+        public int id { get; set; }
+        public string Title { get; set; }
+        public int Weight { get; set; }
+        public int assignmentId { get; set; }
     }
 }

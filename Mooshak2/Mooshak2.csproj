@@ -281,6 +281,7 @@
     <Content Include="Views\UserControl\AddCourse.cshtml" />
     <Content Include="Views\Assignments\CreateMilestone.cshtml" />
     <Content Include="Views\Courses\StudentList.cshtml" />
+    <Content Include="Views\Assignments\DeleteMilestone.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

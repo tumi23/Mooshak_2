@@ -14,7 +14,7 @@ namespace Mooshak2.Services
 	{
 		private Context db = new Context();
 
-        public List<AssignmentViewModel> GetAssignmentAndCourse()
+        public List<AssignmentIndexViewModel> GetAssignmentAndCourse()
         {
             string userName = HttpContext.Current.User.Identity.GetUserName();
             var query = from assign in db.Assignment
@@ -23,11 +23,11 @@ namespace Mooshak2.Services
                         join stdntCrsLst in db.StudentCourseList on course.Id equals stdntCrsLst.courseId
                         join user in db.AspNetUsers on stdntCrsLst.UserName equals user.UserName
                         where user.UserName == userName
-                        select new AssignmentViewModel { Assignments = assign, Courses = course };
-            List<AssignmentViewModel> model = new List<AssignmentViewModel>();
+                        select new AssignmentIndexViewModel { Assignments = assign, Courses = course };
+            List<AssignmentIndexViewModel> model = new List<AssignmentIndexViewModel>();
             foreach (var assignment in query)
             {
-                model.Add(new AssignmentViewModel { Assignments = assignment.Assignments, Courses = assignment.Courses });
+                model.Add(new AssignmentIndexViewModel { Assignments = assignment.Assignments, Courses = assignment.Courses });
             }
             return model;
         }
@@ -35,6 +35,16 @@ namespace Mooshak2.Services
         public List<Assignment> GetAllAssignments()
         {
             return db.Assignment.ToList();
+        }
+
+        public List<Milestone> GetAllMilestones()
+        {
+            return db.Milestone.ToList();
+        }
+
+        public List<MilestoneList> GetAllMilestoneLists()
+        {
+            return db.MilestoneList.ToList();
         }
 
         public List<StudentCourseList> GetAllStudentList()
@@ -47,6 +57,64 @@ namespace Mooshak2.Services
             Assignment assignment = db.Assignment.SingleOrDefault(x => x.Id == assignmentID);
             return assignment;
         }
+
+        public Milestone GetMilestoneById(int id)
+        {
+            Milestone milestone = db.Milestone.SingleOrDefault(x => x.Id == id);
+            return milestone;
+        }
+
+        public List<Milestone> GetAllMilestonesByAssignId(int id)
+        {
+            var query = from milestone in db.Milestone
+                        join milestonelist in db.MilestoneList on milestone.Id equals milestonelist.milestoneId
+                        where milestonelist.assignmentId == id
+                        select milestone;
+            List<Milestone> milestoneList = new List<Milestone>();
+            foreach (var milestone in query)
+            {
+                milestoneList.Add(new Milestone { Id = milestone.Id, Title = milestone.Title, Weight = milestone.Weight});
+            }
+            return milestoneList;
+        }
+
+//--------------------------------Milestone Creation-----------------------------------------------------------------------------------------------
+        public void CreateMilestoneList(MilestoneCreateViewModel model)
+        {
+            var count = GetAllMilestoneLists().LastOrDefault();
+            int id;
+            if (count == null)
+                id = 0;
+            else
+                id = count.Id + 1;
+            db.MilestoneList.Add(new MilestoneList
+            {
+                Id = id,
+                assignmentId = model.assignmentId,
+                milestoneId = model.id
+            });
+            db.SaveChanges();
+        }
+
+        public MilestoneCreateViewModel CreateMilestone(MilestoneCreateViewModel model)
+        {
+            var count = GetAllMilestones().LastOrDefault();
+            int id;
+            if (count == null)
+                id = 0;
+            else
+                id = count.Id + 1;
+            db.Milestone.Add(new Milestone
+            {
+                Id = id,
+                Title = model.Title,
+                Weight = model.Weight
+            });
+            db.SaveChanges();
+            model.id = id;
+            return model;
+        }
+
 //--------------------------------Assignment Deletion----------------------------------------------------------------------------------------------
         public void AssignmentDelete(int id) //Eyðir assignment gefið útfrá Id og með því entry úr assignmentList, Sýnum GradeList, 
         {
@@ -107,26 +175,29 @@ namespace Mooshak2.Services
 
 
 //--------------------------------Milestone Deletion-----------------------------------------------------------------------------------------------
-        public void MilestoneDelete(int id) //Eyðir milestone, MilestoneGradeList entry sínu og MilestoneList entry sínu
+        public void MilestoneDelete(int milestoneId) //Eyðir milestone, MilestoneGradeList entry sínu og MilestoneList entry sínu
         {
             //MilestoneList To be Removed
-            List<MilestoneList> MilestoneListRemoval = new List<MilestoneList>();
-            MilestoneListRemoval = GetAllMilestoneListEntries(id);
-            foreach(var listentry in MilestoneListRemoval)
+            MilestoneList MilestoneListRemoval = new MilestoneList();
+            MilestoneListRemoval = GetMilestoneListEntry(milestoneId);
+            if (MilestoneListRemoval != null)
             {
-                db.MilestoneList.Remove(listentry);
+                db.MilestoneList.Remove(MilestoneListRemoval);
             }
 
             //MilestoneGradeList To be Removed
             List<MilestoneGradeList> MilestoneGradeRemoval = new List<MilestoneGradeList>();
-            MilestoneGradeRemoval = GetAllMilestoneGradeListEntries(id);
-            foreach(var listentry in MilestoneGradeRemoval)
+            MilestoneGradeRemoval = GetAllMilestoneGradeListEntries(milestoneId);
+            if (MilestoneGradeRemoval != null)
             {
-                db.MilestoneGradeList.Remove(listentry);
+                foreach (var listentry in MilestoneGradeRemoval)
+                {
+                    db.MilestoneGradeList.Remove(listentry);
+                }
             }
 
             //Milestone To be Removed
-            Milestone milestone = db.Milestone.Find(id);
+            Milestone milestone = db.Milestone.Find(milestoneId);
             db.Milestone.Remove(milestone);
             db.SaveChanges();
         }
@@ -145,15 +216,15 @@ namespace Mooshak2.Services
             return milestoneListEntry;
         }
 
-        public List<MilestoneList> GetAllMilestoneListEntries(int milestoneId)
+        public MilestoneList GetMilestoneListEntry(int milestoneId)
         {
             var query = from milestonelist in db.MilestoneList
                         where milestonelist.milestoneId == milestoneId
                         select milestonelist;
-            List<MilestoneList> milestoneListEntry = new List<MilestoneList>();
+            MilestoneList milestoneListEntry = new MilestoneList();
             foreach (var milestoneList in query)
             {
-                milestoneListEntry.Add(new MilestoneList { Id = milestoneList.Id, assignmentId = milestoneList.assignmentId, milestoneId = milestoneList.milestoneId });
+                milestoneListEntry = milestoneList;
             }
             return milestoneListEntry;
         }
