@@ -1,10 +1,10 @@
-﻿@model Mooshak2.DAL.AspNetUser
+﻿@model Mooshak2.Models.UserDetailViewModel
 
 @{
     ViewBag.Title = "Details";
 }
 
-<h2>@Html.DisplayFor(model => model.UserName)</h2>
+<h2>@Html.DisplayFor(model => model.user.UserName)</h2>
 
 <div>
     <h4>Details</h4>
@@ -17,12 +17,40 @@
         </p>
 
         <p class="ass-p">
-            @Html.DisplayFor(model => model.Email)
+            @Html.DisplayFor(model => model.user.UserName)
         </p>
-
     </div>
 </div>
+@if (Model.courses.Count() != 0)
+{
+    <h4>Courses this user is in</h4>
+        <table class="table">
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Description
+                </th>
+            </tr>
+            @foreach (var item in Model.courses)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                </tr>
+            }
+        </table>
+}
+else
+{
+    <h4>This user is currently not in any Courses</h4>
+}
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.user.Id }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

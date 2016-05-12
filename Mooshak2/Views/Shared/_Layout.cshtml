@@ -22,7 +22,8 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Assignments", "Index", "Assignments")</li>
-                    <li>@Html.ActionLink("Courses", "Index", "Courses")</li>@if (User.IsInRole("Admin"))
+                    <li>@Html.ActionLink("Courses", "Index", "Courses")</li>
+                    @if (User.IsInRole("Admin"))
                     {
                         <li>@Html.ActionLink("User Control", "Index", "UserControl", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
                     }

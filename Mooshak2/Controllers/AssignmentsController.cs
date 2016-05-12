@@ -123,8 +123,9 @@ namespace Mooshak2.Controllers
         [Authorize(Roles = "Admin, Teacher")]
         public ActionResult Delete(int id)
         {
-            Assignment model = new Assignment();
-            model = aService.GetAssignmentByID(id);
+            AssignmentDetailViewModel model = new AssignmentDetailViewModel();
+            model.Assignments = aService.GetAssignmentByID(id);
+            model.Milestones = aService.GetAllMilestonesByAssignId(id);
             return View(model);
         }
 
@@ -132,9 +133,7 @@ namespace Mooshak2.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Assignment assignment = db.Assignment.Find(id);
-            db.Assignment.Remove(assignment);
-            db.SaveChanges();
+            aService.AssignmentDelete(id);
             return RedirectToAction("Index");
         }
 

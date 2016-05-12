@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System;
+using Mooshak2.DAL;
 
 namespace Mooshak2.Models
 {
@@ -124,5 +125,12 @@ namespace Mooshak2.Models
         public int courseId { get; set; }
 
         public IEnumerable<System.Web.Mvc.SelectListItem> ListCourses { get; set; }
+    }
+
+    public class UserDetailViewModel
+    {
+        public AspNetUser user { get; set; }
+  
+        public List<Course> courses { get; set; }
     }
 }

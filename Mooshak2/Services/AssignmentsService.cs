@@ -116,33 +116,39 @@ namespace Mooshak2.Services
         }
 
 //--------------------------------Assignment Deletion----------------------------------------------------------------------------------------------
-        public void AssignmentDelete(int id) //Eyðir assignment gefið útfrá Id og með því entry úr assignmentList, Sýnum GradeList, 
+        public void AssignmentDelete(int assignmentId) //Eyðir assignment gefið útfrá Id og með því entry úr assignmentList, Sýnum GradeList, 
         {
             //Eyðir öllum milestones tengd Assignmentinu sem er gefið í gegnum Id
             List<Milestone> MilestoneRemoval = new List<Milestone>();
-            MilestoneRemoval = GetAllMilestoneEntries(id);
-            foreach (var milestone in MilestoneRemoval)
+            MilestoneRemoval = GetAllMilestoneEntries(assignmentId);
+            if (MilestoneRemoval != null)
             {
-                MilestoneDelete(milestone.Id);
+                foreach (var milestone in MilestoneRemoval)
+                {
+                    MilestoneDelete(milestone.Id);
+                }
             }
 
             //Eyðir öllum AssignmentGradeList entries tengd Assignmentinu sem er gefið í gegnum Id
             List<AssignmentGradeList> AssignmentGradeListRemoval = new List<AssignmentGradeList>();
-            AssignmentGradeListRemoval = GetAllAssignmentGradeEntries(id);
-            foreach (var assignmentGradeEntry in AssignmentGradeListRemoval)
+            AssignmentGradeListRemoval = GetAllAssignmentGradeEntries(assignmentId);
+            if (AssignmentGradeListRemoval != null)
             {
-                db.AssignmentGradeList.Remove(assignmentGradeEntry);
+                foreach (var assignmentGradeEntry in AssignmentGradeListRemoval)
+                {
+                    db.AssignmentGradeList.Remove(assignmentGradeEntry);
+                }
             }
 
-            //Eyðir öllum AssignmentList entries tengd Assignmentinu sem er gefið í gegnum Id
-            List<AssignmentList> AssignmentListRemoval = new List<AssignmentList>();
-            AssignmentListRemoval = GetAllAssignmentListEntries(id);
-            foreach (var assignListEntry in AssignmentListRemoval)
+            //Eyðir AssignmentList entry tengt Assignmentinu sem er gefið í gegnum Id
+            AssignmentList AssignmentListRemoval = new AssignmentList();
+            AssignmentListRemoval = GetAssignmentListEntry(assignmentId);
+            if (AssignmentListRemoval != null)
             {
-                db.AssignmentList.Remove(assignListEntry);
+                db.AssignmentList.Remove(AssignmentListRemoval);
             }
 
-            Assignment assignment = db.Assignment.Find(id);
+            Assignment assignment = db.Assignment.Find(assignmentId);
             db.Assignment.Remove(assignment);
             db.SaveChanges();
         }
@@ -160,15 +166,15 @@ namespace Mooshak2.Services
             return assignmentGradeListEntry;
         }
 
-        List<AssignmentList> GetAllAssignmentListEntries(int assignmentId)
+        AssignmentList GetAssignmentListEntry(int assignmentId)
         {
             var query = from assignList in db.AssignmentList
                         where assignList.AssignmentId == assignmentId
                         select assignList;
-            List<AssignmentList> assignmentListEntry = new List<AssignmentList>();
+            AssignmentList assignmentListEntry = new AssignmentList();
             foreach (var assignmentList in query)
             {
-                assignmentListEntry.Add(new AssignmentList { Id = assignmentList.Id, courseId = assignmentList.courseId, AssignmentId = assignmentList.AssignmentId });
+                assignmentListEntry = assignmentList;
             }
             return assignmentListEntry;
         }

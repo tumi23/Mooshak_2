@@ -12,4 +12,16 @@ namespace Mooshak2.Models
         public string UserName { get; set; }
         public string Email { get; set; }
     }
+
+    public class CourseDeleteViewModel
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+
+        public List<CourseStudentViewModel> studentList { get; set; }
+
+        public List<Assignment> assignments { get; set; }
+    }
+
 }

@@ -39,5 +39,30 @@ namespace Mooshak2.Services
         {
             return db.StudentCourseList.ToList();
         }
+
+        public UserDetailViewModel GetUserDetailView(AspNetUser user)
+        {
+            List<Course> courses = new List<Course>();
+            courses = GetStudentCoursesByUserName(user.UserName);
+            UserDetailViewModel userModel = new UserDetailViewModel();
+            userModel.user = user;
+            userModel.courses = courses;
+
+            return userModel;
+        }
+
+        public List<Course> GetStudentCoursesByUserName(string userName)
+        {
+            var query = from course in db.Course
+                        join stdntCrsLst in db.StudentCourseList on course.Id equals stdntCrsLst.courseId
+                        where (stdntCrsLst.UserName == userName)
+                        select course;
+            List<Course> courseList = new List<Course>();
+            foreach (var course in query)
+            {
+                courseList.Add(new Course { Id = course.Id, Name = course.Name, Description = course.Description});
+            }
+            return courseList;
+        }
     }
 }

@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using Mooshak2.DAL;
 using Mooshak2.Services;
+using Mooshak2.Models;
 
 namespace Mooshak2.Controllers
 {
@@ -37,7 +38,9 @@ namespace Mooshak2.Controllers
             {
                 return HttpNotFound();
             }
-            return View(course);
+            CourseDeleteViewModel model = new CourseDeleteViewModel();
+            model = cService.GetCourseModel(course);
+            return View(model);
         }
 
         // GET: Courses/Create
@@ -122,7 +125,9 @@ namespace Mooshak2.Controllers
             {
                 return HttpNotFound();
             }
-            return View(course);
+            CourseDeleteViewModel model = new CourseDeleteViewModel();
+            model = cService.GetCourseModel(course);
+            return View(model);
         }
 
         // POST: Courses/Delete/5

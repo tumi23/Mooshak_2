@@ -82,7 +82,9 @@ namespace Mooshak2.Controllers
             {
                 return HttpNotFound();
             }
-            return View(aspNetUser);
+            UserDetailViewModel model = new UserDetailViewModel();
+            model = uService.GetUserDetailView(aspNetUser);
+            return View(model);
         }
 
         // GET: UserControler/Create

@@ -76,5 +76,23 @@ namespace Mooshak2.Services
         {
             return db.Course.ToList();
         }
+
+        public CourseDeleteViewModel GetCourseModel(Course course)
+        {
+            CourseDeleteViewModel model = new CourseDeleteViewModel();
+            model.Id = course.Id;
+            model.Name = course.Name;
+            model.Description = course.Description;
+
+            List<Assignment> assign = new List<Assignment>();
+            assign = GetAllAssignmentEntries(course.Id);
+            model.assignments = assign;
+
+            List <CourseStudentViewModel> studentList = new List<CourseStudentViewModel>();
+            studentList = GetCourseStudentList(course.Id);
+            model.studentList = studentList;
+
+            return model;
+        }
     }
 }
