@@ -1,14 +1,17 @@
 ﻿@model IEnumerable<Mooshak2.DAL.Course>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Your Courses";
 }
 
-<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+<h2>Course List</h2>
+@if (User.IsInRole("Admin"))
+{
+    <p class="btn btn-default" role="button">
+        @Html.ActionLink("+", "Create")
+    </p>
+}
+<hr />
 <table class="table">
     <tr>
         <th>

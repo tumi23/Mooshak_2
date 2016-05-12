@@ -5,7 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Mooshak2.DAL;
-using Mooshak2.Models.ViewModels;
+using Mooshak2.Models;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
@@ -25,9 +25,7 @@ namespace Mooshak2.Controllers
         [Authorize]
         public ActionResult Index()
         {
-            List<Assignment> model = new List<Assignment>();
-            model = aService.GetAssignmentsInCourse();
-            return View(model);
+            return View(aService.GetAssignmentAndCourse());
         }
 
         [Authorize(Roles = "Admin, Teacher")]
@@ -91,7 +89,7 @@ namespace Mooshak2.Controllers
         {
             if (ModelState.IsValid)
             {
-                var count = aService.GetAllAssignments().SingleOrDefault();
+                var count = aService.GetAllAssignments().LastOrDefault();
                 int id;
                 if (count == null)
                     id = 0;
@@ -104,8 +102,7 @@ namespace Mooshak2.Controllers
                     Description = model.Description,
                     DateOfAssigned = model.DateOfAssigned,
                     DateOfSubmittion = model.DateOfSubmittion,
-                    AllowedProgrammingLanguage = model.AllowedProgrammingLanguage,
-                    FinalGrade = model.FinalGrade
+                    AllowedProgrammingLanguage = model.AllowedProgrammingLanguage
                 });
                 db.AssignmentList.Add(new AssignmentList
                 {

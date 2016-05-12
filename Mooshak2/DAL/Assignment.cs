@@ -25,7 +25,5 @@ namespace Mooshak2.DAL
         [Required]
         [StringLength(250)]
         public string AllowedProgrammingLanguage { get; set; }
-
-        public decimal? FinalGrade { get; set; }
     }
 }

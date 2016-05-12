@@ -7,39 +7,40 @@
 <h2>@Html.DisplayFor(model => model.Name)</h2>
 
 <div class="ass-detail">
-    
-    <label>ID: </label>
-    <p>@Html.DisplayFor(model => model.Id)</p> 
-
-    <label>Name: </label>
-    <p>@Html.DisplayFor(model => model.Name)</p> 
-
-    <label>Description: </label>
-    <p>@Html.DisplayFor(model => model.Description)</p>
-    
     <p>
-    <label>First Day of Submission:  </label>
-    @Html.DisplayFor(model => model.DateOfAssigned)
+        <label>Assignment Name:  </label>
+        @Html.DisplayFor(model => model.Name)
     </p>
-    
     <p>
-    <label>Last Day of Submittion:  </label>
-    @Html.DisplayFor(model => model.DateOfSubmittion)
+        <label>Description:  </label>
+        @Html.DisplayFor(model => model.Description)
     </p>
 
     <p>
-    <label>Allowed Programming Language:  </label>
-    @Html.DisplayFor(model => model.AllowedProgrammingLanguage)
+        <label>Day Assigned:  </label>
+        @Html.DisplayFor(model => model.DateOfAssigned)
+    </p>
+    
+    <p>
+        <label>Last Day of Submittion:  </label>
+        @Html.DisplayFor(model => model.DateOfSubmittion)
     </p>
 
     <p>
-    <label>Final Grade:  </label>
-    @Html.DisplayFor(model => model.FinalGrade)
-    </p>
-
-    
+        <label>Allowed Programming Language:  </label>
+        @Html.DisplayFor(model => model.AllowedProgrammingLanguage)
+    </p> 
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+@if (User.IsInRole("Admin, Teacher"))
+{
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}
+else
+{
+    <p>
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

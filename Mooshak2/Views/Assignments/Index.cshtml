@@ -1,47 +1,57 @@
-﻿@model IEnumerable<Mooshak2.DAL.Assignment>
+﻿@model IEnumerable<Mooshak2.Models.AssignmentViewModel>
 
 @{
     ViewBag.Title = "Assignments";
-    int idholder = -1;
 }
 
-<h2>Your Assignments</h2>
-<p class=" btn btn-default" role="button">
-    @Html.ActionLink("+", "Create")
-</p>
+<h2>Assignment List</h2>
+
+@if (User.IsInRole("Admin") || User.IsInRole("Teacher"))
+{
+    <p class="btn btn-default" role="button">
+        @Html.ActionLink("+", "Create")
+    </p>
+}
+
 <hr />
+
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Name)
+            Name
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Description)
+            Description
         </th>
-        <th></th>
+        <th>
+            Course
+        </th>
     </tr>
 
     @foreach (var item in Model)
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Name)
+                @Html.DisplayFor(modelItem => item.Assignments.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Description)
+                @Html.DisplayFor(modelItem => item.Assignments.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Courses.Name)
             </td>
             @if (User.IsInRole("Admin"))
             {
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Id }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.Id })
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Assignments.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Assignments.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Assignments.Id })
                 </td>
             }
             else
             {
                 <td>
-                    @Html.ActionLink("Details", "Details", new { id = item.Id })
+                    @Html.ActionLink("Details", "Details", new { id = item.Assignments.Id })
                 </td>
             }
         </tr>

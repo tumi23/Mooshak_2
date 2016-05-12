@@ -6,16 +6,16 @@ namespace Mooshak2.DAL
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("Milestone")]
-    public partial class Milestone
+    [Table("AssignmentGradeList")]
+    public partial class AssignmentGradeList
     {
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Id { get; set; }
 
-        [Required]
-        [StringLength(50)]
-        public string Title { get; set; }
+        public int? userId { get; set; }
 
-        public int? Weight { get; set; }
+        public int? assignmentId { get; set; }
+
+        public decimal? grade { get; set; }
     }
 }

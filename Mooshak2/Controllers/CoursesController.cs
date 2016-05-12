@@ -14,6 +14,7 @@ namespace Mooshak2.Controllers
     public class CoursesController : Controller
     {
         private Context db = new Context();
+
         private CourseService cService = new CourseService();
 
         // GET: Courses
@@ -129,9 +130,7 @@ namespace Mooshak2.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Course course = db.Course.Find(id);
-            db.Course.Remove(course);
-            db.SaveChanges();
+            cService.CourseDelete(id);
             return RedirectToAction("Index");
         }
 

@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using Mooshak2.DAL;
 using System.Web.Mvc;
+using System;
 
-namespace Mooshak2.Models.ViewModels
+namespace Mooshak2.Models
 {
     public class AssignmentCreateViewModel
     {
@@ -16,8 +15,18 @@ namespace Mooshak2.Models.ViewModels
         public DateTime DateOfAssigned { get; set; }
         public DateTime DateOfSubmittion { get; set; }
         public string AllowedProgrammingLanguage { get; set; }
-        public decimal? FinalGrade { get; set; }
 
         public IEnumerable<SelectListItem> ListCourses { get; set; }
+    }
+
+    public class AssignmentViewModel
+	{
+        public Assignment Assignments { get; set; }
+        public Course Courses { get; set; }
+	}
+
+    public class AssignmentMilestoneViewModel
+    {
+        public string Title { get; set; }
     }
 }

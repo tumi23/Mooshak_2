@@ -181,11 +181,13 @@
     <Compile Include="DAL\AspNetUserRoles.cs" />
     <Compile Include="DAL\AspNetUser.cs" />
     <Compile Include="DAL\Assignment.cs" />
+    <Compile Include="DAL\AssignmentGradeList.cs" />
     <Compile Include="DAL\AssignmentList.cs" />
     <Compile Include="DAL\Context.cs" />
     <Compile Include="DAL\Course.cs" />
     <Compile Include="DAL\C__MigrationHistory.cs" />
     <Compile Include="DAL\Milestone.cs" />
+    <Compile Include="DAL\MilestoneGradeList.cs" />
     <Compile Include="DAL\MilestoneList.cs" />
     <Compile Include="DAL\StudentCourseList.cs" />
     <Compile Include="DAL\Submit.cs" />
@@ -193,16 +195,13 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\CourseViewModels.cs" />
     <Compile Include="Models\Entities\Assignment.cs" />
     <Compile Include="Models\Entities\AssignmentMilestone.cs" />
     <Compile Include="Models\Entities\Course.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\ViewModels\AssignmentMilestoneViewModel.cs" />
-    <Compile Include="Models\ViewModels\AssignmentViewModel.cs" />
-    <Compile Include="Models\ViewModels\AssignmentCreateViewModel.cs" />
-    <Compile Include="Models\ViewModels\DetailUserViewModel.cs" />
-    <Compile Include="Models\ViewModels\UserViewModel.cs" />
+    <Compile Include="Models\AssignmentViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AssignmentsService.cs" />
     <Compile Include="Services\CourseService.cs" />
@@ -280,6 +279,8 @@
     <Content Include="Views\UserControl\Delete.cshtml" />
     <Content Include="Views\UserControl\Details.cshtml" />
     <Content Include="Views\UserControl\AddCourse.cshtml" />
+    <Content Include="Views\Assignments\CreateMilestone.cshtml" />
+    <Content Include="Views\Courses\StudentList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

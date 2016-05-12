@@ -2,37 +2,37 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 using Mooshak2.DAL;
+using Mooshak2.Models;
+using Mooshak2.Services;
 
 namespace Mooshak2.Services
 {
     public class UserService
     {
         private Context db = new Context();
+        private CourseService cService = new CourseService();
 
-        /*public List<AspNetUser> GetUsersInCourse()
+        public  AddCourseViewModel GetDropDownListCourses()
         {
-            var AssiList = GetAllAssignments();
-            var CoursList = GetAllCourses();
-            var StuList = GetAllStudentList();
-            var 
+            List<SelectListItem> items = new List<SelectListItem>();
+            List<Course> course = cService.GetAllCourses();
+            foreach (var item in course)
+            {
+                items.Add(new SelectListItem { Text = item.Name, Value = Convert.ToString(item.Id), Selected = true });
+            }
 
-            List<AspNetUser> model = new List<AspNetUser>();
-
-            var UserEntity = from user in 
-                             join 
-        }*/
-
-
-
-        public List<Assignment> GetAllAssignments()
-        {
-            return db.Assignment.ToList();
+            var model = new AddCourseViewModel();
+            {
+                model.ListCourses = items;
+            }
+            return model;
         }
 
-        public List<Course> GetAllCourses()
+        public List<StudentCourseList> GetAllStudentCourseList()
         {
-            return db.Course.ToList();
+            return db.StudentCourseList.ToList();
         }
 
         public List<StudentCourseList> GetAllStudentList()

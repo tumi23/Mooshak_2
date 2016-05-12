@@ -15,7 +15,6 @@ using Microsoft.Owin.Security;
 using Mooshak2.DAL;
 using Mooshak2.Services;
 using Mooshak2.Models;
-using Mooshak2.Models.ViewModels;
 
 namespace Mooshak2.Controllers
 {
@@ -26,6 +25,8 @@ namespace Mooshak2.Controllers
 
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+
+        private UserService uService = new UserService();
 
         public UserControlController()
         {
@@ -178,6 +179,38 @@ namespace Mooshak2.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        [Authorize(Roles = "Admin, Teacher")]
+        public ActionResult AddCourse(string id)
+        {
+            AddCourseViewModel model = new AddCourseViewModel();
+            model = uService.GetDropDownListCourses();
+            model.UserName = UserManager.FindById(Convert.ToString(id)).UserName;
+            return View(model);
+        }
+        [HttpPost]
+        [Authorize(Roles = "Admin, Teacher")]
+        public ActionResult AddCourse(AddCourseViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var count = uService.GetAllStudentCourseList().LastOrDefault();
+                int id;
+                if (count == null)
+                    id = 0;
+                else
+                    id = count.Id + 1;
+                db.StudentCourseList.Add(new StudentCourseList
+                {
+                    Id = id,
+                    UserName = model.UserName,
+                    courseId = model.courseId
+                });
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(model);
         }
     }
 }

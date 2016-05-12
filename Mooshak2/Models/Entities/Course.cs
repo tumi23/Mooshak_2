@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Mooshak2.Models.Entities
 {
-	public class Course
-	{
-		public int ID { get; set; }
-		public string Name { get; set; }
-	}
+    public class Course
+    {
+        public int ID { get; set; }
+        public string Name { get; set; }
+    }
 }

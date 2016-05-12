@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Mooshak2.DAL;
 
-namespace Mooshak2.Models.ViewModels
+namespace Mooshak2.Models
 {
-    public class UserViewModel
+    public class CourseStudentViewModel
     {
+        public string userId { get; set; }
         public string UserName { get; set; }
         public string Email { get; set; }
-        public string Role { get; set; }
-        public string userModel { get; set; }
     }
 }

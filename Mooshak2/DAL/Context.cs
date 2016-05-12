@@ -19,9 +19,11 @@ namespace Mooshak2.DAL
         public virtual DbSet<AspNetUserRoles> AspNetUserRoles { get; set; }
         public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
         public virtual DbSet<Assignment> Assignment { get; set; }
+        public virtual DbSet<AssignmentGradeList> AssignmentGradeList { get; set; }
         public virtual DbSet<AssignmentList> AssignmentList { get; set; }
         public virtual DbSet<Course> Course { get; set; }
         public virtual DbSet<Milestone> Milestone { get; set; }
+        public virtual DbSet<MilestoneGradeList> MilestoneGradeList { get; set; }
         public virtual DbSet<MilestoneList> MilestoneList { get; set; }
         public virtual DbSet<StudentCourseList> StudentCourseList { get; set; }
         public virtual DbSet<Submit> Submit { get; set; }
@@ -50,9 +52,9 @@ namespace Mooshak2.DAL
                 .Property(e => e.AllowedProgrammingLanguage)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<Assignment>()
-                .Property(e => e.FinalGrade)
-                .HasPrecision(20, 0);
+            modelBuilder.Entity<AssignmentGradeList>()
+                .Property(e => e.grade)
+                .HasPrecision(18, 0);
 
             modelBuilder.Entity<Course>()
                 .Property(e => e.Name)
@@ -65,6 +67,10 @@ namespace Mooshak2.DAL
             modelBuilder.Entity<Milestone>()
                 .Property(e => e.Title)
                 .IsUnicode(false);
+
+            modelBuilder.Entity<MilestoneGradeList>()
+                .Property(e => e.grade)
+                .HasPrecision(18, 0);
 
             modelBuilder.Entity<StudentCourseList>()
                 .Property(e => e.UserName)

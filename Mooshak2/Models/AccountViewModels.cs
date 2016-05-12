@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System;
 
 namespace Mooshak2.Models
 {
@@ -115,5 +116,13 @@ namespace Mooshak2.Models
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
+    }
+
+    public class AddCourseViewModel
+    {
+        public string UserName { get; set; }
+        public int courseId { get; set; }
+
+        public IEnumerable<System.Web.Mvc.SelectListItem> ListCourses { get; set; }
     }
 }
