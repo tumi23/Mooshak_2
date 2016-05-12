@@ -9,7 +9,7 @@
 @if (User.IsInRole("Admin") || User.IsInRole("Teacher"))
 {
     <p class="btn btn-default" role="button">
-        @Html.ActionLink("+", "Create")
+        @Html.ActionLink("+", "Create", "Assignments")
     </p>
 }
 
