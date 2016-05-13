@@ -120,9 +120,8 @@ namespace Mooshak2.Services
                 }
                 db.SaveChanges();
             }
-            AspNetUserRoles roleDeletion = db.AspNetUserRoles.Find(user.Id);
-            db.AspNetUserRoles.Remove(roleDeletion);
-            db.AspNetUsers.Remove(user);
+            AspNetUser deleteUser = db.AspNetUsers.Find(userId);
+            db.AspNetUsers.Remove(deleteUser);
             db.SaveChanges();
         }
 
