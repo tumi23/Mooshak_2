@@ -25,6 +25,7 @@
             @Html.DisplayFor(model => model.Description)
         </dd>
     </dl>
+    <hr />
     @if (Model.assignments.Count() != 0)
     {
         <h4>Assignments in this Course</h4>
@@ -41,7 +42,7 @@
             {
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Name)
+                        @Html.ActionLink(item.Name, "Details", "Assignments", new { id = item.Id }, null)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Description)
@@ -54,10 +55,12 @@
     {
         <h4>There are no assignments currently in @Html.DisplayFor(model => model.Name)</h4>
     }
+    <hr />
     @if (User.IsInRole("Admin") || User.IsInRole("Teacher"))
     {
         if (Model.studentList.Count() != 0)
         {
+            
             <h4>Users in this Course</h4>
             <table class="table">
                 <tr>
@@ -90,9 +93,9 @@
     @if (User.IsInRole("Admin"))
     {
     <p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-        @Html.ActionLink("See Student List", "StudentList", new { id = Model.Id }) |
-        @Html.ActionLink("Back to List", "Index")
+        @Html.ActionLink("Edit Course", "Edit", new { id = Model.Id }) |
+        @Html.ActionLink("Delete Course", "Delete", new { id = Model.Id }) |
+        @Html.ActionLink("Back to Course List", "Index")
     </p>
     }
     else

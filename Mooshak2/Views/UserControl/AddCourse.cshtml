@@ -1,22 +1,28 @@
 ﻿@model Mooshak2.Models.AddCourseViewModel
 @{
-    ViewBag.Title = "AddCourse";
+    ViewBag.Title = "Assign Course";
 }
 
-<h2>AddCourse</h2>
+<h2>Assign Course to @Html.DisplayFor(model => model.UserName)</h2>
+
 @using (Html.BeginForm("AddCourse", "UserControl", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
-<div class="form-group">
-    @Html.LabelFor(model => model.courseId, htmlAttributes: new { @class = "control-label col-md-2" })
-    <div class="col-md-10">
-        @Html.DropDownListFor(model => Model.courseId, Model.ListCourses)
-        @Html.ValidationMessageFor(model => model.courseId, "", new { @class = "text-danger" })
-    </div>
-    @Html.HiddenFor(x => x.UserName)
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="AddCourse" class="btn btn-default" />
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <div class="form-group">
+            <div class="col-md-10">
+                <label>Course Name: </label>
+                @Html.DropDownListFor(model => Model.courseId, Model.ListCourses)
+                @Html.ValidationMessageFor(model => model.courseId, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
-</div>
+        @Html.HiddenFor(x => x.UserName)
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="AddCourse" class="btn btn-default" />
+            </div>
+        </div>
+     </div>
 }
+@Html.ActionLink("Back to Course List", "Index")

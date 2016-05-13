@@ -17,7 +17,7 @@
         </p>
 
         <p class="ass-p">
-            @Html.DisplayFor(model => model.user.UserName)
+            @Html.DisplayFor(model => model.user.Email)
         </p>
     </div>
 </div>
@@ -51,6 +51,8 @@ else
     <h4>This user is currently not in any Courses</h4>
 }
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.user.Id }) |
+    @Html.ActionLink("Edit User", "Edit", new { id = Model.user.Id }) |
+    @Html.ActionLink("Delete User", "Delete", new { id = Model.user.Id }) |
+    @Html.ActionLink("Assign New Course", "AddCourse", new { id = Model.user.Id }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

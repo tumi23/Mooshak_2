@@ -85,8 +85,9 @@
 @if (User.IsInRole("Admin") || User.IsInRole("Teacher"))
 {
     <p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.Assignments.Id }) |
+        @Html.ActionLink("Edit Assignment", "Edit", new { id = Model.Assignments.Id }) |
         @Html.ActionLink("Add Milestone", "CreateMilestone", new { id = Model.Assignments.Id }) |
+        @Html.ActionLink("Delete Assignment", "Delete", new { id = Model.Assignments.Id }) |
         @Html.ActionLink("Back to List", "Index")
     </p>
 }

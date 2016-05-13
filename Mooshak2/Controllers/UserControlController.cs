@@ -168,9 +168,8 @@ namespace Mooshak2.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
-            AspNetUser aspNetUser = db.AspNetUsers.Find(id);
-            db.AspNetUsers.Remove(aspNetUser);
-            db.SaveChanges();
+            AspNetUser user = db.AspNetUsers.Find(id);
+            uService.UserDelete(user);
             return RedirectToAction("Index");
         }
 

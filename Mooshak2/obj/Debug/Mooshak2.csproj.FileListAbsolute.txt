@@ -273,7 +273,6 @@ C:\Users\Notandi\Documents\GitHub\Mooshak_2\Mooshak2\bin\Microsoft.Owin.Security
 C:\Users\Notandi\Documents\GitHub\Mooshak_2\Mooshak2\bin\Microsoft.Owin.Security.Google.xml
 C:\Users\Notandi\Documents\GitHub\Mooshak_2\Mooshak2\bin\Microsoft.Owin.Security.Twitter.xml
 C:\Users\Notandi\Documents\GitHub\Mooshak_2\Mooshak2\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
-C:\Users\Notandi\Documents\GitHub\Mooshak_2\Mooshak2\obj\Debug\Mooshak2.csprojResolveAssemblyReference.cache
 C:\Users\Örvar Blær Guðmundss\Dropbox\HR\Verklegt námsskeið 2\Mooshak2\Mooshak_2\Mooshak2\bin\roslyn\csc.exe
 C:\Users\Örvar Blær Guðmundss\Dropbox\HR\Verklegt námsskeið 2\Mooshak2\Mooshak_2\Mooshak2\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
 C:\Users\Örvar Blær Guðmundss\Dropbox\HR\Verklegt námsskeið 2\Mooshak2\Mooshak_2\Mooshak2\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
@@ -343,3 +342,4 @@ C:\Users\Örvar Blær Guðmundss\Dropbox\HR\Verklegt námsskeið 2\Mooshak2\Moos
 C:\Users\Örvar Blær Guðmundss\Dropbox\HR\Verklegt námsskeið 2\Mooshak2\Mooshak_2\Mooshak2\obj\Debug\Mooshak2.csprojResolveAssemblyReference.cache
 C:\Users\Örvar Blær Guðmundss\Dropbox\HR\Verklegt námsskeið 2\Mooshak2\Mooshak_2\Mooshak2\obj\Debug\Mooshak2.dll
 C:\Users\Örvar Blær Guðmundss\Dropbox\HR\Verklegt námsskeið 2\Mooshak2\Mooshak_2\Mooshak2\obj\Debug\Mooshak2.pdb
+C:\Users\Notandi\Documents\GitHub\Mooshak_2\Mooshak2\obj\Debug\Mooshak2.csprojResolveAssemblyReference.cache

@@ -161,7 +161,7 @@ namespace Mooshak2.Services
             List<AssignmentGradeList> assignmentGradeListEntry = new List<AssignmentGradeList>();
             foreach (var assignmentListGrade in query)
             {
-                assignmentGradeListEntry.Add(new AssignmentGradeList { Id = assignmentListGrade.Id, assignmentId = assignmentListGrade.assignmentId, userId = assignmentListGrade.userId, grade = assignmentListGrade.grade});
+                assignmentGradeListEntry.Add(new AssignmentGradeList { Id = assignmentListGrade.Id, assignmentId = assignmentListGrade.assignmentId, UserName = assignmentListGrade.UserName, grade = assignmentListGrade.grade});
             }
             return assignmentGradeListEntry;
         }
@@ -243,7 +243,7 @@ namespace Mooshak2.Services
             List<MilestoneGradeList> milestoneGradeListEntry = new List<MilestoneGradeList>();
             foreach (var milestoneGradeList in query)
             {
-                milestoneGradeListEntry.Add(new MilestoneGradeList { Id = milestoneGradeList.Id, userId = milestoneGradeList.userId, milestoneId = milestoneGradeList.milestoneId, grade = milestoneGradeList.grade });
+                milestoneGradeListEntry.Add(new MilestoneGradeList { Id = milestoneGradeList.Id, UserName = milestoneGradeList.UserName, milestoneId = milestoneGradeList.milestoneId, grade = milestoneGradeList.grade });
             }
             return milestoneGradeListEntry;
         }

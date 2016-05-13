@@ -53,6 +53,10 @@ namespace Mooshak2.DAL
                 .IsUnicode(false);
 
             modelBuilder.Entity<AssignmentGradeList>()
+                .Property(e => e.UserName)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<AssignmentGradeList>()
                 .Property(e => e.grade)
                 .HasPrecision(18, 0);
 
@@ -69,6 +73,10 @@ namespace Mooshak2.DAL
                 .IsUnicode(false);
 
             modelBuilder.Entity<MilestoneGradeList>()
+                .Property(e => e.UserName)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<MilestoneGradeList>()
                 .Property(e => e.grade)
                 .HasPrecision(18, 0);
 
@@ -81,7 +89,7 @@ namespace Mooshak2.DAL
                 .IsUnicode(false);
 
             modelBuilder.Entity<Submit>()
-                .Property(e => e.Code)
+                .Property(e => e.FilePath)
                 .IsUnicode(false);
         }
     }

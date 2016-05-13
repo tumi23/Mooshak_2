@@ -12,7 +12,8 @@ namespace Mooshak2.DAL
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Id { get; set; }
 
-        public int? userId { get; set; }
+        [StringLength(250)]
+        public string UserName { get; set; }
 
         public int? milestoneId { get; set; }
 

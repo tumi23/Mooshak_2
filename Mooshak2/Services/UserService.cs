@@ -64,5 +64,80 @@ namespace Mooshak2.Services
             }
             return courseList;
         }
+
+        public void UserDelete(AspNetUser user)//Deletear sjálfum sér og StudentCourseList entryum tengd sjálfum sér, öllum  AssignmentGrades og MilestoneGrades tengd sjálfum sér
+        {
+            List<AssignmentGradeList> assignGradeListDeletion = new List<AssignmentGradeList>();
+            assignGradeListDeletion = GetAssignGradeEntries(user.UserName);
+            if (assignGradeListDeletion != null)
+            {
+                foreach (var assignGrade in assignGradeListDeletion)
+                {
+                    db.AssignmentGradeList.Remove(assignGrade);
+                }
+            }
+
+            List<MilestoneGradeList> milestoneGradeDeletion = new List<MilestoneGradeList>();
+            milestoneGradeDeletion = GetMilestoneGradeEntries(user.UserName);
+            if (milestoneGradeDeletion != null)
+            {
+                foreach (var milestoneGrade in milestoneGradeDeletion)
+                {
+                    db.MilestoneGradeList.Remove(milestoneGrade);
+                }
+            }
+
+            List<StudentCourseList> studentCourseDeletion = new List<StudentCourseList>();
+            studentCourseDeletion = GetStudentCourseEntries(user.UserName);
+            if (studentCourseDeletion != null)
+            {
+                foreach (var studentCourse in studentCourseDeletion)
+                {
+                    db.StudentCourseList.Remove(studentCourse);
+                }
+            }
+
+            db.AspNetUsers.Remove(user);
+            db.SaveChanges();
+        }
+
+        public List<MilestoneGradeList> GetMilestoneGradeEntries(string userName)
+        {
+            var query = from milestoneGrdLst in db.MilestoneGradeList
+                        where (milestoneGrdLst.UserName == userName)
+                        select milestoneGrdLst;
+            List<MilestoneGradeList> gradeList = new List<MilestoneGradeList>();
+            foreach (var grade in query)
+            {
+                gradeList.Add(new MilestoneGradeList { Id = grade.Id, UserName = grade.UserName, milestoneId = grade.milestoneId, grade = grade.grade });
+            }
+            return gradeList;
+        }
+
+        public List<AssignmentGradeList> GetAssignGradeEntries(string userName)
+        {
+            var query = from assignGrdLst in db.AssignmentGradeList
+                        where (assignGrdLst.UserName == userName)
+                        select assignGrdLst;
+            List<AssignmentGradeList> gradeList = new List<AssignmentGradeList>();
+            foreach (var grade in query)
+            {
+                gradeList.Add(new AssignmentGradeList { Id = grade.Id, UserName = grade.UserName, assignmentId = grade.assignmentId, grade = grade.assignmentId });
+            }
+            return gradeList;
+        }
+
+        public List<StudentCourseList> GetStudentCourseEntries(string userName)
+        {
+            var query = from stdntCrsLst in db.StudentCourseList
+                        where (stdntCrsLst.UserName == userName)
+                        select stdntCrsLst;
+            List<StudentCourseList> stdntList = new List<StudentCourseList>();
+            foreach (var stdnt in query)
+            {
+                stdntList.Add(new StudentCourseList { Id = stdnt.Id, UserName = stdnt.UserName, courseId = stdnt.courseId});
+            }
+            return stdntList;
+        }
     }
 }

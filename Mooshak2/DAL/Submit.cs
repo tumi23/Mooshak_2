@@ -16,10 +16,10 @@ namespace Mooshak2.DAL
         [StringLength(250)]
         public string UserName { get; set; }
 
-        public int assignId { get; set; }
+        public int MilestoneId { get; set; }
 
         [Required]
-        public string Code { get; set; }
+        public string FilePath { get; set; }
 
         public DateTime DateOfSubmit { get; set; }
     }
