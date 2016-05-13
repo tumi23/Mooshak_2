@@ -30,6 +30,11 @@ namespace Mooshak2.Services
             return model;
         }
 
+        public List<AspNetRoles> GetAllRoles()
+        {
+            return db.AspNetRoles.ToList();
+        }
+
         public List<StudentCourseList> GetAllStudentCourseList()
         {
             return db.StudentCourseList.ToList();
@@ -60,44 +65,78 @@ namespace Mooshak2.Services
             List<Course> courseList = new List<Course>();
             foreach (var course in query)
             {
-                courseList.Add(new Course { Id = course.Id, Name = course.Name, Description = course.Description});
+                courseList.Add(new Course { Id = course.Id, Name = course.Name, Description = course.Description });
             }
             return courseList;
         }
 
-        public void UserDelete(AspNetUser user)//Deletear sjálfum sér og StudentCourseList entryum tengd sjálfum sér, öllum  AssignmentGrades og MilestoneGrades tengd sjálfum sér
+        public List<StudentCourseList> GetStudentCourseListByUserName(string userName)
+        {
+            var query = from stdntCrsLst in db.StudentCourseList
+                        where (stdntCrsLst.UserName == userName)
+                        select stdntCrsLst;
+            List<StudentCourseList> courseList = new List<StudentCourseList>();
+            foreach (var course in query)
+            {
+                courseList.Add(new StudentCourseList { Id = course.Id, UserName = course.UserName, courseId = course.courseId});
+            }
+            return courseList;
+        }
+
+        public void UserDelete(string userName, string userId)//Deletear sjálfum sér og StudentCourseList entryum tengd sjálfum sér, öllum  AssignmentGrades og MilestoneGrades tengd sjálfum sér
         {
             List<AssignmentGradeList> assignGradeListDeletion = new List<AssignmentGradeList>();
-            assignGradeListDeletion = GetAssignGradeEntries(user.UserName);
+            assignGradeListDeletion = GetAssignGradeEntries(userName);
             if (assignGradeListDeletion != null)
             {
                 foreach (var assignGrade in assignGradeListDeletion)
                 {
                     db.AssignmentGradeList.Remove(assignGrade);
                 }
+                db.SaveChanges();
             }
 
             List<MilestoneGradeList> milestoneGradeDeletion = new List<MilestoneGradeList>();
-            milestoneGradeDeletion = GetMilestoneGradeEntries(user.UserName);
+            milestoneGradeDeletion = GetMilestoneGradeEntries(userName);
             if (milestoneGradeDeletion != null)
             {
                 foreach (var milestoneGrade in milestoneGradeDeletion)
                 {
                     db.MilestoneGradeList.Remove(milestoneGrade);
                 }
+                db.SaveChanges();
             }
 
             List<StudentCourseList> studentCourseDeletion = new List<StudentCourseList>();
-            studentCourseDeletion = GetStudentCourseEntries(user.UserName);
+            studentCourseDeletion = GetStudentCourseEntries(userName);
+            RemoveCourseViewModel removeCourseEntry = new RemoveCourseViewModel();
             if (studentCourseDeletion != null)
             {
                 foreach (var studentCourse in studentCourseDeletion)
                 {
-                    db.StudentCourseList.Remove(studentCourse);
+                    removeCourseEntry.courseId = studentCourse.courseId;
+                    removeCourseEntry.UserName = studentCourse.UserName;
+                    StudentCourseListDelete(removeCourseEntry);
                 }
+                db.SaveChanges();
             }
-
+            AspNetUserRoles roleDeletion = db.AspNetUserRoles.Find(user.Id);
+            db.AspNetUserRoles.Remove(roleDeletion);
             db.AspNetUsers.Remove(user);
+            db.SaveChanges();
+        }
+
+        public void StudentCourseListDelete(RemoveCourseViewModel model)
+        {
+            var query = from stdntCrsLst in db.StudentCourseList
+                        where stdntCrsLst.UserName == model.UserName && stdntCrsLst.courseId == model.courseId
+                        select stdntCrsLst;
+            StudentCourseList removeEntry = new StudentCourseList();
+            foreach(var entry in query)
+            {
+                removeEntry = entry;
+            }
+            db.StudentCourseList.Remove(removeEntry);
             db.SaveChanges();
         }
 

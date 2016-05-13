@@ -3,14 +3,18 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.IO;
 using System.Web.Mvc;
 using Mooshak2.DAL;
+using System.Web.UI.WebControls;
 using Mooshak2.Models;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using System.Data.SqlClient;
+using System.Security.Permissions;
+using System.Security.Principal;
 
 namespace Mooshak2.Controllers
 {
@@ -60,8 +64,13 @@ namespace Mooshak2.Controllers
         [Authorize(Roles = "Admin, Teacher")]
         public ActionResult Create(AssignmentCreateViewModel model)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
+                AssignmentCreateViewModel returnModel = new AssignmentCreateViewModel();
+                returnModel = cService.GetDropDownListCourses();
+                ModelState.AddModelError("", "All fields aren't filled out.");
+                return View(returnModel);
+            }
                 var count = aService.GetAllAssignments().LastOrDefault();
                 int id;
                 if (count == null)
@@ -84,8 +93,6 @@ namespace Mooshak2.Controllers
                 });
                 db.SaveChanges();
                 return RedirectToAction("Index");
-            }
-            return View(model);
         }
 
         [HttpPost]
@@ -150,6 +157,42 @@ namespace Mooshak2.Controllers
         public ActionResult DeleteMilestone(Milestone model)
         {
             aService.MilestoneDelete(model.Id);
+            return RedirectToAction("Index");
+        }
+
+        [Authorize]
+        public ActionResult Submit(int id)
+        {
+            Submit submit = new Submit();
+            submit.MilestoneId = id;
+            return View(submit);
+        }
+
+        /*[HttpPost]
+        public ActionResult Submit(HttpPostedFileBase file)
+        {
+            string userName = User.Identity.GetUserName();
+            if (file.ContentLength > 0)
+            {
+                var fileName = Path.GetFileName(file.FileName);
+                var path = "C:\\Submits\\" + userName + "\\" + fileName;
+                if (!Directory.Exists(path))
+                {
+                    Directory.CreateDirectory(path);
+                }
+                file.SaveAs(path);
+            }
+            //aService.RunCompilerCPlusPLus(userName);
+            ViewBag.Message = "Upload successful";
+            return RedirectToAction("Index");
+        }*/
+
+        [HttpPost]
+        public ActionResult Submit()
+        {
+            string userName = User.Identity.GetUserName();
+            aService.RunCompilerCPlusPLus(userName);
+            ViewBag.Message = "Upload successful";
             return RedirectToAction("Index");
         }
 

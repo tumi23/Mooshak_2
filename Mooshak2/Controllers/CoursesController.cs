@@ -58,8 +58,11 @@ namespace Mooshak2.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(Course course)
         {
-            if (ModelState.IsValid)
+            if(!ModelState.IsValid)
             {
+                ModelState.AddModelError("", "All fields aren't filled out.");
+                return View(course);
+            }
                 var count = cService.GetAllCourses().LastOrDefault();
                 int id;
                 if (count == null)
@@ -74,9 +77,6 @@ namespace Mooshak2.Controllers
                 });
                 db.SaveChanges();
                 return RedirectToAction("Index");
-            }
-
-            return View(course);
         }
 
         // GET: Courses/Edit/5

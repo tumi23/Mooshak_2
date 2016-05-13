@@ -76,8 +76,14 @@
             {
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "DeleteMilestone", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "DeleteMilestone", new { id = item.Id })
             </td>
+            }
+            else if (User.IsInRole("Student"))
+            {
+                <td>
+                    @Html.ActionLink("Submit", "Submit", new { id = item.Id })
+                </td>
             }
         </tr>
     }

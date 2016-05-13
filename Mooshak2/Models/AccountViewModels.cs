@@ -127,6 +127,14 @@ namespace Mooshak2.Models
         public IEnumerable<System.Web.Mvc.SelectListItem> ListCourses { get; set; }
     }
 
+    public class RemoveCourseViewModel
+    {
+        public string userId { get; set; }
+        public string UserName { get; set; }
+        public string courseName { get; set; }
+        public int courseId { get; set; }
+    }
+
     public class UserDetailViewModel
     {
         public AspNetUser user { get; set; }

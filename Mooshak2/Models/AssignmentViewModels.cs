@@ -10,10 +10,34 @@ namespace Mooshak2.Models
     {
         public int Id { get; set; }
         public string courseId { get; set; }
+
+        [Required]
+        [StringLength(100, ErrorMessage = "There must be a name for the assignment")]
+        [Display(Name = "Name")]
         public string Name { get; set; }
+
+        [Required]
+        [StringLength(100, ErrorMessage = "There must be a Description for the assignment")]
+        [Display(Name = "Description")]
         public string Description { get; set; }
+
+        [Required]
+        //[StringLength(100, ErrorMessage = "There must be a Date of Assigned in DD/MM/YYYY HH:MM:SS Format")]
+        [DataType(DataType.DateTime)]
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy hh:mm:ss}", ApplyFormatInEditMode = true)]
+        [Display(Name = "DateOfAssigned")]
         public DateTime DateOfAssigned { get; set; }
+
+        [Required]
+        //[StringLength(100, ErrorMessage = "There must be a Date of Submittion in DD/MM/YYYY HH:MM:SS Format")]
+        [DataType(DataType.DateTime)]
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy hh:mm:ss}", ApplyFormatInEditMode = true)]
+        [Display(Name = "DateOfSubmittion")]
         public DateTime DateOfSubmittion { get; set; }
+
+        [Required]
+        [StringLength(100, ErrorMessage = "There must be a List for Allowed Programming languages for the assignment")]
+        [Display(Name = "AllowedProgrammingLanguage")]
         public string AllowedProgrammingLanguage { get; set; }
 
         public IEnumerable<SelectListItem> ListCourses { get; set; }

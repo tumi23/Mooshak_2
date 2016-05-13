@@ -343,3 +343,5 @@ C:\Users\Örvar Blær Guðmundss\Dropbox\HR\Verklegt námsskeið 2\Mooshak2\Moos
 C:\Users\Örvar Blær Guðmundss\Dropbox\HR\Verklegt námsskeið 2\Mooshak2\Mooshak_2\Mooshak2\obj\Debug\Mooshak2.dll
 C:\Users\Örvar Blær Guðmundss\Dropbox\HR\Verklegt námsskeið 2\Mooshak2\Mooshak_2\Mooshak2\obj\Debug\Mooshak2.pdb
 C:\Users\Notandi\Documents\GitHub\Mooshak_2\Mooshak2\obj\Debug\Mooshak2.csprojResolveAssemblyReference.cache
+C:\Users\Notandi\Documents\GitHub\Mooshak_2\Mooshak2\obj\Debug\Mooshak2.Properties.Resources.resources
+C:\Users\Notandi\Documents\GitHub\Mooshak_2\Mooshak2\obj\Debug\Mooshak2.csproj.GenerateResource.Cache

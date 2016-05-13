@@ -1,0 +1,24 @@
+﻿@model Mooshak2.DAL.Submit
+
+@{
+    ViewBag.Title = "Submit";
+}
+
+<h2>Submit</h2>
+
+
+
+        <h4>Submit</h4>
+        <hr />
+@using (Html.BeginForm("Submit", "Assignments", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+        <div class="form-group">
+            <label>Upload Assignment</label>
+            <input type="file" data-filename-placement="inside" name="file"/>
+            <input type="submit" name="Submit" id="@Model.MilestoneId"value="Upload"/>
+        </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
