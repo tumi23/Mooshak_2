@@ -310,7 +310,7 @@ table {
 html {
   font-size: 62.5%;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-  background: #660000;
+  background-image: url(../Img/Background.jpg);
 }
 
 body {
